@@ -2,7 +2,7 @@ import pdb
 from db.run_sql import run_sql
 from models.director import Director
 
-
+# CREATE A DIRECTOR
 def save(director):
     sql = "INSERT INTO directors (name, age, bio) VALUES (%s, %s, %s) RETURNING *"
     values = [director.name, director.age, director.bio]
@@ -12,6 +12,7 @@ def save(director):
     return director
 
 
+# READ ALL DIRECTORS
 def select_all():
     directors = []
     sql = "SELECT * FROM directors"
@@ -23,6 +24,7 @@ def select_all():
     return directors
 
 
+# READ A DIRECTOR
 def select(id):
     director = None
     sql = "SELECT * FROM directors WHERE id = %s"
@@ -34,11 +36,20 @@ def select(id):
     return director
 
 
+# UPDATE A DIRECTOR
+def update(director):
+    sql = "UPDATE directors SET (name, age, bio) = (%s, %s, %s) WHERE id = %s"
+    values = [director.name, director.age, director.bio, director.id]
+    run_sql(sql, values)
+
+
+# DELETE ALL DIRECTORS
 def delete_all():
     sql = "DELETE FROM directors"
     run_sql(sql)
 
 
+# DELETE A DIRECTOR
 def delete(id):
     sql = "DELETE FROM directors WHERE id = %s"
     values = [id]
