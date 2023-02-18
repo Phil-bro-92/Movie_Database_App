@@ -23,6 +23,17 @@ def select_all():
     return directors
 
 
+def select(id):
+    director = None
+    sql = "SELECT * FROM directors WHERE id = %s"
+    values = [id]
+    result = run_sql(sql, values)[0]
+
+    if result:
+        director = Director(result["name"], result["age"], result["bio"], result["id"])
+    return director
+
+
 def delete_all():
     sql = "DELETE FROM directors"
     run_sql(sql)
