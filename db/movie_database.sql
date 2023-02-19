@@ -1,6 +1,4 @@
 DROP TABLE IF EXISTS movies;
-DROP TABLE IF EXISTS movie_casts;
-DROP TABLE IF EXISTS movie_genres;
 DROP TABLE IF EXISTS actors;
 DROP TABLE IF EXISTS genres;
 DROP TABLE IF EXISTS directors;
@@ -16,17 +14,6 @@ CREATE TABLE actors (
     name VARCHAR(255),
     age INT,
     bio text
-);
-CREATE TABLE movie_genres (
-    id SERIAL PRIMARY KEY,
-    genre1 INT REFERENCES genres(id) ON DELETE CASCADE,
-    genre2 INT REFERENCES genres(id) ON DELETE CASCADE
-);
-CREATE TABLE movie_casts (
-    id SERIAL PRIMARY KEY,
-    actor1 INT REFERENCES actors(id) ON DELETE CASCADE,
-    actor2 INT REFERENCES actors(id) ON DELETE CASCADE,
-    actor3 INT REFERENCES actors(id) ON DELETE CASCADE
 );
 CREATE TABLE movies (
     id SERIAL PRIMARY KEY,
@@ -87,10 +74,6 @@ CREATE TABLE movies (
 --         52,
 --         'Uma Karuna Thurman (born April 29, 1970) is an American actress and former model. She has performed in a variety of films, from romantic comedies and dramas to science fiction and action films.'
 --     );
--- INSERT INTO movie_casts(actor1, actor2, actor3)
--- VALUES (1, 2, 3);
--- INSERT INTO movie_genres(genre1, genre2)
--- VALUES(1, 5);
 -- INSERT INTO movies (
 --         title,
 --         year,
