@@ -1,4 +1,6 @@
+DROP TABLE IF EXISTS watch_lists;
 DROP TABLE IF EXISTS movies;
+DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS actors;
 DROP TABLE IF EXISTS genres;
 DROP TABLE IF EXISTS directors;
@@ -15,16 +17,25 @@ CREATE TABLE actors (
     age INT,
     bio text
 );
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(255),
+    last_name VARCHAR(255),
+    email VARCHAR(255)
+);
 CREATE TABLE movies (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255),
     year INT,
     description text,
-    cast_id INT REFERENCES movie_casts(id) ON DELETE CASCADE,
-    genre_id INT REFERENCES movie_genres(id) ON DELETE CASCADE,
     director_id INT REFERENCES directors(id) ON DELETE CASCADE
 );
--- INSERT INTO genres (type)
+CREATE TABLE watch_lists (
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(id) ON DELETE CASCADE,
+    movie_id INT REFERENCES movies(id) ON DELETE CASCADE
+);
+ -- INSERT INTO genres (type)
 -- VALUES ('Crime');
 -- INSERT INTO genres (type)
 -- VALUES ('Action');
